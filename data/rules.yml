@@ -1,0 +1,23 @@
+version: "2.0"
+
+rules:
+- rule: answer bot challenge
+  steps:
+  - intent: bot_challenge
+  - action: utter_help
+
+- rule: Activate form
+  steps:
+  - intent: my_income
+  - action: catch_email
+  - active_loop: catch_email
+
+- rule: Submit form
+  condition:
+  - active_loop: catch_email
+  steps:
+  - action: catch_email
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_check_income_by_email

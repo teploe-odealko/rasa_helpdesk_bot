@@ -1,0 +1,155 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- out_of_scope:
+    use_entities: true
+- my_income:
+    use_entities: true
+- help:
+    use_entities: true
+- thank:
+    use_entities: true
+- greet:
+    use_entities: true
+- vacation_own_expence:
+    use_entities: true
+- electronic_work_book:
+    use_entities: true
+- unemployment_benefits:
+    use_entities: true
+- did_that_halp:
+    use_entities: true
+- happy:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- bot_challenge:
+    use_entities: true
+- iamabot:
+    use_entities: true
+- deny:
+    use_entities: true
+- affirm:
+    use_entities: true
+- sertificate:
+    use_entities: true
+- income_statement:
+    use_entities: true
+- insurance_statement:
+    use_entities: true
+- work_place_sertificate:
+    use_entities: true
+- 182n_sertificate:
+    use_entities: true
+- union_dues:
+    use_entities: true
+- employment_history_book_copy:
+    use_entities: true
+- personal_data_change:
+    use_entities: true
+- covid_test:
+    use_entities: true
+entities:
+- email
+slots:
+  previous_email:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  email:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  requested_slot:
+    type: rasa.shared.core.slots.UnfeaturizedSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+responses:
+  utter_human:
+  - text: Переключение на оператора
+  utter_income_statement:
+  - text: оформляем справку о доходах
+  utter_insurance_statement:
+  - text: оформляем справку по страховым взносам
+  utter_work_place_sertificate:
+  - text: оформляем справку с места работы
+  utter_182n_sertificate:
+  - text: оформляем справку 182н
+  utter_union_dues:
+  - text: Удержание страховых взносов
+  utter_employment_history_book_copy:
+  - text: Копия трудовой книжки
+  utter_personal_data_change:
+  - text: Изменения личных данных
+  utter_covid_test:
+  - text: Тест а короновирус
+  utter_certificate_type_choise:
+  - buttons:
+    - payload: /income_statement
+      title: Справка о доходах
+    - payload: /insurance_statement
+      title: Cправка по страховым взносам
+    - payload: /work_place_sertificate
+      title: Справка с места работы
+    - payload: /182n_sertificate
+      title: Справка 182n
+    text: О какой справке хочешь узнать?
+  utter_out_of_scope:
+  - text: Пока я не могу тебя понять :(
+  utter_welcome:
+  - text: You're welcome!
+  utter_help:
+  - text: |-
+      Я виртуальный бот-помощник 
+      Ты можешь попросить меня: 
+      - Как взять отпузк за свой счет 
+      - Какая у меня заплата? 
+      - Как оформить электронную трудовую книжку? 
+      - Как получить пособие по безработице?
+  utter_greet:
+  - text: Привет! Как я могу помочь?
+  utter_ask_email:
+  - text: Введите ваш email
+  utter_vacation_own_expence:
+  - text: 'Об этом можешь почитать здесь: https://secrets.tinkoff.ru/bezopasnost-biznesa/otpusk-bez-oplaty/'
+  utter_ask_use_previous_email:
+  - text: Хотите использовать пердыдущий email {previous_email}?
+  utter_my_income:
+  - text: доход пользователя {email} составляет 100 тысяч рублей
+  utter_electronic_work_book:
+  - text: Тебе следует обратиться в отдел электронных книжек
+  utter_unemployment_benefits:
+  - text: Тебе следует обратиться в отдел пособий
+  utter_did_that_halp:
+  - text: Это тебе помогло?
+  utter_happy:
+  - text: Отлично!
+  utter_goodbye:
+  - text: До скорого
+  utter_iamabot:
+  - text: Я - бот-помощник.
+actions:
+- action_ask_email
+- action_check_income_by_email
+- utter_out_of_scope
+- validate_catch_email
+forms:
+  catch_email:
+    required_slots:
+      email:
+      - entity: email
+        type: from_entity
+      - intent: affirm
+        type: from_intent
+        value: true
+      - intent: deny
+        type: from_intent
+        value: false
+e2e_actions: []

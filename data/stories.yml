@@ -1,0 +1,97 @@
+version: "2.0"
+
+stories:
+
+- story: Неизвестный запрос
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
+- story: Возможности бота
+  steps:
+  - intent: help
+  - action: utter_help
+
+- story: Благодарность
+  steps:
+  - intent: thank
+  - action: utter_welcome
+
+- story: greet + give info
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_help
+
+
+- story: Отпуск за свой счет
+  steps:
+  - intent: vacation_own_expence
+  - action: utter_vacation_own_expence
+
+#- story: Мой доход
+#  steps:
+#  - intent: my_income
+#  - action: email
+#  - action: utter_my_income
+#  - action: utter_did_that_halp
+
+- story: Электронная трудовая книжка
+  steps:
+  - intent: electronic_work_book
+  - action: utter_electronic_work_book
+
+- story: Пособие по безработице
+  steps:
+  - intent: unemployment_benefits
+  - action: utter_unemployment_benefits
+
+- story: какая-то справка
+  steps:
+    - intent: sertificate
+    - action: utter_certificate_type_choise
+
+- story: справка о доходах
+  steps:
+    - intent: income_statement
+    - action: utter_income_statement
+
+- story: справка по страховым взносам
+  steps:
+    - intent: insurance_statement
+    - action: utter_insurance_statement
+
+- story: Справка с места работы
+  steps:
+    - intent: work_place_sertificate
+    - action: utter_work_place_sertificate
+
+- story: 182н справка
+  steps:
+    - intent: 182n_sertificate
+    - action: utter_182n_sertificate
+
+- story: удержание страховых взносов
+  steps:
+    - intent: union_dues
+    - action: utter_union_dues
+
+- story: Изменение личных данных
+  steps:
+    - intent: personal_data_change
+    - action: utter_personal_data_change
+
+- story: тест на ковид
+  steps:
+    - intent: covid_test
+    - action: utter_covid_test
+#- story: User interrupts the form and doesn't want to continue
+#  steps:
+#  - intent: my_income
+#  - action: catch_email
+#  - active_loop: catch_email
+#  - intent: stop
+#  - action: utter_ask_continue
+#  - intent: stop
+#  - action: action_deactivate_loop
+#  - active_loop: null
